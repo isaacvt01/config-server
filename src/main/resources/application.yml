@@ -1,0 +1,23 @@
+server:
+  port: 7777
+
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: default
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/isaacvt01/config-repo.git
+          default-label: master
+          clone-on-start: true
+          username: isaacvt01
+          password: ${GIT_TOKEN}
+eureka:
+  instance:
+    instance-id: "${spring.application.name}:${random.value}"
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL}
